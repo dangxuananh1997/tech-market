@@ -17,7 +17,7 @@ export class AdminNewPhoneComponent implements OnInit {
   constructor(private http: Http) { }
 
   ngOnInit() {
-    this.http.get('http://192.168.150.155/TechMarket/api/Brands/GetBrands')
+    this.http.get('http://localhost:51075/api/Brands/GetBrands')
       .subscribe(response => {
         this.brandList = response.json();
       });
@@ -41,7 +41,7 @@ export class AdminNewPhoneComponent implements OnInit {
       }
     );
     this.http.post(
-      'http://192.168.150.155/TechMarket/api/Phones/PostPhone',
+      'http://localhost:51075/api/Phones/PostPhone',
       {
         phone: this.phone
       }

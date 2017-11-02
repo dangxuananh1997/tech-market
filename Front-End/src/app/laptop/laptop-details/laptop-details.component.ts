@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LaptopDetails } from '../../model/laptop-details';
+import { Laptop } from '../../model/laptop';
 
 import { LaptopService } from '../laptop.service';
 
@@ -12,7 +12,7 @@ import { LaptopService } from '../laptop.service';
 })
 export class LaptopDetailsComponent implements OnInit {
   @Input() LaptopID: number;
-  laptopDetails: LaptopDetails;
+  laptopDetails: Laptop;
 
   constructor(
     private laptopService: LaptopService,

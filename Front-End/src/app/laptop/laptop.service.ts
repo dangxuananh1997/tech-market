@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 import { Laptop } from '../model/laptop';
-import { LaptopDetails } from '../model/laptop-details';
 
 @Injectable()
 export class LaptopService {
@@ -28,10 +27,10 @@ export class LaptopService {
       .catch(this.alertFail);
   }
 
-  getLaptopDetails(LaptopID: number): Promise<LaptopDetails> {
+  getLaptopDetails(LaptopID: number): Promise<Laptop> {
     return this.http.get(this.getLaptopByIDLink + LaptopID)
       .toPromise()
-      .then(response => response.json() as LaptopDetails)
+      .then(response => response.json() as Laptop)
       .catch(this.alertFail);
   }
 
