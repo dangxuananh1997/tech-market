@@ -117,8 +117,9 @@ namespace TechMarket.Controllers
                 return BadRequest(ModelState);
             }
 
-            Phone phone = data["phone"].ToObject<Phone>();
             int id = data["id"].ToObject<Int32>();
+            Phone phone = data["phone"].ToObject<Phone>();
+            
 
             if (id != phone.PhoneID || id != phone.Product.ProductID)
             {
@@ -142,7 +143,9 @@ namespace TechMarket.Controllers
                     throw;
                 }
             }
+            Product p = await db.Products.FindAsync(id);
 
+            phone.Product.GUID = p.GUID;
             db.Entry(phone.Product).State = EntityState.Modified;
 
             try
