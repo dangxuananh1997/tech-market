@@ -1,0 +1,10 @@
+ul.nav-tabs li.nav-item {
+    text-align: center;
+    width: 50%;
+}
+div.tabs {
+    margin-top: 16px;
+}
+div.tab-content {
+    margin-top: 16px;
+}

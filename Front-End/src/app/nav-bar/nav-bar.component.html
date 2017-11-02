@@ -1,0 +1,35 @@
+<section class="app-nav-bar sticky-top">
+	<div class="container">
+		<nav class="navbar navbar-light bg-light">
+			<div class="row">
+				<div class="col-2">
+					<a class="navbar-brand" href="#">
+						<img src="../../assets/img/logo.jpg" alt="" height="40px">
+					</a>
+				</div>
+				<div class="search col-10">
+					<div class="input-group">
+						<div class="input-group-addon"><i class="material-icons">search</i></div>
+						<input type="text" class="form-control" 
+							placeholder="Search Product" 
+							data-toggle="dropdown" 
+							aria-haspopup="true" 
+							aria-expanded="false" 
+							id="search-box"
+							[(ngModel)]="SearchValue"
+							(keyup)="search()"
+							>
+					</div>
+					<div class="search-result">
+						<div class="dropdown-menu" aria-labelledby="search-box">
+							<a class="dropdown-item" href="#">Some Phone</a>
+							<a class="dropdown-item" href="#">Some Phone</a>
+							<a class="dropdown-item" href="#">Some Phone</a>
+							<a class="dropdown-item" href="#">Some Phone</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+</section>

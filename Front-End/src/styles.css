@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "SF";
+    src: url("/assets/fonts/SanFrancisco/SF-UI-Display-Regular.otf");
+}
+* {
+	font-family: SF;
+}
+body {
+    min-height: 100vh;
+    padding-bottom: 24px;
+    position: relative;
+}
