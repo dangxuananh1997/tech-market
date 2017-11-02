@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Product App</title>
+</head>
+<body>
+
+    <div>
+        <h2>All Laptops</h2>
+        <ul id="laptops" />
+    </div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="laptopId" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <input id="TestPost" type="button" value="POST" onclick="postLaptop();" />
+        <br />
+        <input type="text" id="lapId" size="5" />
+        <input id="DeletePost" type="button" value="Delete" onclick="deleteLaptop();" />
+        <input id="SearchInRange" type="button" value="InRange" onclick="getByRange();" />
+        <input id="Filter" type="button" value="Filter" onclick="filterP();" />
+        <p id="product" />
+
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/Laptops/GetLaptops';
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        console.log(item);
+                        // Add a list item for the product.
+                        $('<li>', { text: formatItem(item) }).appendTo($('#laptops'));
+                    });
+                });
+        });
+
+        function formatItem(lap) {
+            return 'ID: ' + lap.LaptopID + '\n, CPU: ' + lap.CPU;
+        }
+
+        function find() {
+            var id = $('#laptopId').val();
+            $.getJSON('api/Laptops/GetLaptopByID/' + id)
+                .done(function (data) {
+                    console.log(data);
+                    $('#product').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#product').text(err);
+                });
+        }
+
+
+    </script>
+    <script type="text/javascript">
+        function postLaptop() {
+            var product = {
+                ProductName: "Laptop Asus E402NA N3350",
+                Price: 5990000,
+                TypeID : 1,
+                Quantity : 100,
+                BrandID : 3,
+                Thumbnail : "",
+                Pic1 : "",
+                Pic2 : "",
+                Pic3 : "",
+                Pic4 : ""
+            };
+            var laptop = {
+                OS : "Window 10",
+                ScreenWidth : "14 inch",
+                CPU : "i5-5500U",
+                RAM : "4GB",
+                HardDisk : "1TB",
+                Port : "USB 3.0",
+                Battery : "4 Cell",
+                ScreenResolution : "1366x768",
+                GPU: "Intel® HD Graphics",
+                Wifi: "Wi-Fi 802.11 a/b/g/n",
+                Size: "Dài 339 mm - Ngang 235 mm - Dày 21.9 mm",
+                Weight : "1.65kg",
+                Special: "None",
+                Product: product
+            };
+            console.log(product);
+            console.log(laptop);
+            $.ajax({
+                type: "POST",
+                url: "/api/Laptops/PostLaptop",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+
+                data: laptop
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function deleteLaptop() {
+            var lapid = $('#lapId').val();
+            $.ajax({
+                type: "POST",
+                url: '/api/Laptops/DeleteLaptop/' + lapid,
+                dataType: "json",
+                success: function (data) {
+                    alert('Success');
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+         function getByRange() {
+             var f = 10;
+             var l = 20;
+             $.ajax({
+                 type: 'get',
+                 url: '/api/Laptops/GetInRange',
+                 dataType: "json",
+                 success: function (data) {
+                     console.log(data);
+                     alert('Success');
+                 },
+
+                 data: {
+                     first: f,
+                     last: l
+                 }
+             });
+         }
+    </script>
+    <script type="text/javascript">
+         var BrandID = [1, 2];
+         var test = ["a", "a"];
+         var filter = {
+             BrandIDList: BrandID,
+             OSList: test,
+             CPUList: test,
+             RAMList: test,
+             HardDiskList: test,
+             GPUList: test,
+             Weight: test,
+             BatteryList: test
+         }
+         function filterP() {
+             $.ajax({
+                 type: 'Post',
+                 url: '/api/Laptops/FilterLaptop',
+                 dataType: "json",
+                 data: {
+                     filter: filter,
+                     first: 10,
+                     last: 20
+                 },
+                 success: function (data) {
+                     console.log(data);
+                     alert('Success');
+                 },
+
+             });
+         }
+    </script>
+</body>
+</html>

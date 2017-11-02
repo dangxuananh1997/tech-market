@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site/TechMarket" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Files\\PRN292-C\#\\Project\\TechMarket\\TechMarket\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\Files\\PRN292-C\#\\Project\\TechMarket\\TechMarket\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="TechMarketEntities-Web.config Connection String" description="" value="metadata=res://*/Models.TechMarket.csdl|res://*/Models.TechMarket.ssdl|res://*/Models.TechMarket.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=DUONGPHSE62746;Initial Catalog=TechMarket;User ID=sa;Password=Hayhoichua1&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Files\\PRN292-C\#\\Project\\TechMarket\\TechMarket\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='TechMarketEntities']/@connectionString" />
+  </parameter>
+</parameters>

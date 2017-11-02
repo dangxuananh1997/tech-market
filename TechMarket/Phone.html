@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Product App</title>
+</head>
+<body>
+
+    <div>
+        <h2>All Phones</h2>
+        <ul id="phones" />
+    </div>
+    <div>
+        <h2>Search by ID</h2>
+        <input type="text" id="phoneId" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <input id="TestPost" type="button" value="POST" onclick="postPhone();" />
+        <br />
+        <input type="text" id="phId" size="5" />
+        <input id="DeletePost" type="button" value="Delete" onclick="deletePhone();" />
+        <input id="SearchInRange" type="button" value="InRange" onclick="getByRange();" />
+        <input id="Filter" type="button" value="Filter" onclick="filterP();" />
+        <input id="Update" type="button" value="Update" onclick="updateP();" />
+        <input id="Order" type="button" value="Order" onclick="orderP();" />
+        <p id="phone" />
+    </div>
+
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        var uri = 'api/Phones/GetPhones';
+
+        $(document).ready(function () {
+            // Send an AJAX request
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        console.log(item);
+                        // Add a list item for the product.
+                        $('<li>', { text: formatItem(item) }).appendTo($('#phones'));
+                    });
+                });
+        });
+
+        function formatItem(ph) {
+            return 'ID: ' + ph.PhoneID + ', Name: ' + ph.ProductName + ', CPU: ' + ph.CPU;
+        }
+
+        function find() {
+            var id = $('#phoneId').val();
+            $.getJSON('api/Phones/GetPhoneByID/' + id)
+                .done(function (data) {
+                    console.log(data);
+                    $('#phone').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#phone').text(err);
+                });
+        }
+
+
+    </script>
+    <script type="text/javascript">
+        function postPhone() {
+            var product = {
+                ProductName : "Galaxy J7+",
+                Price : 8260000,
+                TypeID : 2,
+                Quantity : 100,
+                BrandID : 2,
+                Thumbnail : "",
+                Pic1 : "",
+                Pic2 : "",
+                Pic3 : "",
+                Pic4 : ""
+            };
+            var phone = {
+                OS : "Android 7.0",
+                ScreenWidth : "5.5\"",
+                CPU: "Mediatek Helio P25 Lite 8 nhân",
+                RAM : "4GB",
+                ROM : "32GB",
+                Camera: "13MP và 5MP (2 Camera)",
+                FontCamera: "16MP",
+                Battery : "3000 mAh",
+                ScreenResolution : "FullHD",
+                Wifi: "8.0.11n",
+                HeadphoneJack: "none",
+                NFC : "none",
+                Sim : "3kg",
+                Special: "none",
+                Product: product
+            };
+            console.log(product);
+            console.log(phone);
+            $.ajax({
+                type: "POST",
+                url: "/api/Phones/PostPhone",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+
+                data: phone
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function deletePhone() {
+            var phId = $('#phId').val();
+            $.ajax({
+                type: "POST",
+                url: '/api/Phones/DeletePhone/' + phId,
+                dataType: "json",
+                success: function (data) {
+                    alert('Success');
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function getImage(Id) {
+            var phId = $('#phId').val();
+            $.ajax({
+                type: "POST",
+                url: '/api/Phones/DeletePhone/' + phId,
+                dataType: "json",
+                success: function (data) {
+                    alert('Success');
+                }
+            });
+        }
+
+        function findById(Id) {
+            $.getJSON('api/Phones/GetPhoneByID/' + Id)
+                .done(function (data) {
+                    console.log(data);
+                    $('#product').text(formatItem(data));
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    $('#product').text(err);
+                });
+        }
+    </script>
+    <script type="text/javascript">
+        function getByRange() {
+            var f = 10;
+            var l = 20;
+            $.ajax({
+                type: 'get',
+                url: '/api/Phones/GetInRange',
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    alert('Success');
+                },
+
+                data: {
+                    first: f,
+                    last: l
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        var BrandID = [1, 2];
+        var test = ["a", "a"];
+        var filter = {
+            BrandIDList: BrandID,
+            OSList: test,
+            CPUList: test,
+            RAMList: test,
+            ROMList: test,
+            CameraList: test,
+            FrontCameraList: test,
+            BatteryList: test
+        }
+        function filterP() {
+            $.ajax({
+                type: 'Post',
+                url: '/api/Phones/FilterPhone',
+                dataType: "json",
+                data: {
+                    filter: filter,
+                    first: 10,
+                    last: 20
+                },
+                success: function (data) {
+                    console.log(data);
+                    alert('Success');
+                },
+
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function updateP() {
+            var id = 2;
+            var product = {
+                ProductName: "Galaxy J7+",
+                Price: 8260000,
+                TypeID: 2,
+                Quantity: 100,
+                BrandID: 2,
+                Thumbnail: "",
+                Pic1: "",
+                Pic2: "",
+                Pic3: "",
+                Pic4: ""
+            };
+            var phone = {
+                OS: "Android 7.0",
+                ScreenWidth: "5.5\"",
+                CPU: "Mediatek Helio P25 Lite 8 nhân",
+                RAM: "4GB",
+                ROM: "32GB",
+                Camera: "13MP và 5MP (2 Camera)",
+                FontCamera: "16MP",
+                Battery: "3000 mAh",
+                ScreenResolution: "FullHD",
+                Wifi: "8.0.11n",
+                HeadphoneJack: "none",
+                NFC: "none",
+                Sim: "3kg",
+                Special: "none",
+                Product: product
+            };
+            console.log(product);
+            console.log(phone);
+            $.ajax({
+                type: "POST",
+                url: "/api/Phones/PutPhone",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+
+                data: {
+                    id: id,
+                    phone: phone
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        var BrandID = [1, 2];
+        var test = ["a", "a"];
+        var filter = {
+            BrandIDList: BrandID,
+            OSList: test,
+            CPUList: test,
+            RAMList: test,
+            ROMList: test,
+            CameraList: test,
+            FrontCameraList: test,
+            BatteryList: test
+        }
+        function filterP() {
+            $.ajax({
+                type: 'Post',
+                url: '/api/Phones/FilterPhone',
+                dataType: "json",
+                data: {
+                    filter: filter,
+                    first: 10,
+                    last: 20
+                },
+                success: function (data) {
+                    console.log(data);
+                    alert('Success');
+                },
+
+            });
+        }
+    </script>
+</body>
+</html>
