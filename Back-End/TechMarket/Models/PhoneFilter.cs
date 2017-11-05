@@ -9,16 +9,14 @@ namespace TechMarket.Models
     {
         public List<int> BrandIDList { get; set; }
         public List<string> OSList { get; set; }
-        public List<string> CPUList { get; set; }
         public List<string> RAMList { get; set; }
         public List<string> ROMList { get; set; }
         public List<string> CameraList { get; set; }
         public List<string> FrontCameraList { get; set; }
-        public List<string> BatteryList { get; set; }
 
         public override string ToString()
         {
-            return BrandIDList + "\n" + OSList + "\n" + CPUList + "\n" + RAMList + "\n " + ROMList + "\n " + CameraList + "\n " + FrontCameraList + "\n " + BatteryList;
+            return BrandIDList + "\n" + OSList + "\n"  + RAMList + "\n " + ROMList + "\n " + CameraList + "\n " + FrontCameraList + "\n " ;
         }
     }
 }
