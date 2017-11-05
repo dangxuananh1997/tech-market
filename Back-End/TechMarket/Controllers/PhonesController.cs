@@ -305,16 +305,6 @@ namespace TechMarket.Controllers
                     }
                 }
             }
-            if (filter.CPUList != null)
-            {
-                foreach (var cpu in filter.CPUList)
-                {
-                    if (!String.IsNullOrEmpty(cpu))
-                    {
-                        p = await db.Phones.Where(phone => phone.CPU.Contains(cpu)).ToListAsync();
-                    }
-                }
-            }
             if (filter.RAMList != null)
             {
                 foreach (var ram in filter.RAMList)
@@ -355,16 +345,7 @@ namespace TechMarket.Controllers
                     }
                 }
             }
-            if (filter.BatteryList != null)
-            {
-                foreach (var battery in filter.BatteryList)
-                {
-                    if (!String.IsNullOrEmpty(battery))
-                    {
-                        p = await db.Phones.Where(phone => phone.Battery.Contains(battery)).ToListAsync();
-                    }
-                }
-            }
+
             var phoneList = p.Select(phone => new
             {
                 phone.PhoneID,
