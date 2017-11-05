@@ -23,6 +23,8 @@ namespace TechMarket.Models
         public string CustomerPhone { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerName { get; set; }
+        public string CustomerNote { get; set; }
+        public bool OrderStatus { get; set; }
     
         public virtual Product Product { get; set; }
     }

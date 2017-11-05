@@ -24,7 +24,6 @@ namespace TechMarket.Models
         public System.Guid GUID { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> Price { get; set; }
-        public int TypeID { get; set; }
         public int Quantity { get; set; }
         public int BrandID { get; set; }
         public string Thumbnail { get; set; }
@@ -34,10 +33,8 @@ namespace TechMarket.Models
         public string Pic4 { get; set; }
     
         public virtual Brand Brand { get; set; }
-        public virtual Laptop Laptop { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         public virtual Phone Phone { get; set; }
-        public virtual Type Type { get; set; }
     }
 }

@@ -46,6 +46,21 @@ namespace TechMarket.Controllers
             return Ok(phoneList);
         }
 
+        [HttpGet]
+        public IHttpActionResult SearchByName(string name)
+        {
+            var phoneList = db.Phones.Select(phone => new
+            {
+                phone.PhoneID,
+                phone.Product.ProductName,
+                phone.Product.Price,
+                phone.Product.Thumbnail,
+
+            }).Where(phone => phone.ProductName.Contains(name));
+
+            return Ok(phoneList);
+        }
+
         // GET: api/Phones/GetPhones/
         [HttpGet]
         public IHttpActionResult GetInRange(int first, int last)
