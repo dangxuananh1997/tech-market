@@ -31,6 +31,7 @@ namespace TechMarket.Controllers
                 phone.Product.Price,
                 phone.Product.BrandID,
                 phone.Product.Thumbnail,
+                phone.Product.Quantity,
                 phone.OS,
                 phone.ScreenWidth,
                 phone.ScreenResolution,
@@ -169,8 +170,9 @@ namespace TechMarket.Controllers
 
         // POST: api/Phones
         [HttpPost]
-        public async Task<IHttpActionResult> PostPhone(Phone phone)
+        public async Task<IHttpActionResult> PostPhone([FromBody]Phone phone)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -354,13 +356,12 @@ namespace TechMarket.Controllers
                 phone.Sim,
                 phone.Special
             }).OrderByDescending(phone => phone.PhoneID).Skip(first).Take(last);
-
-            Debug.WriteLine(filter.ToString());
-            foreach(var i in p)
+            
+            foreach (var i in p)
             {
                 Debug.WriteLine(i.PhoneID);
             }
-            if(p == null)
+            if (p == null)
             {
                 Debug.WriteLine("It's null");
             }
