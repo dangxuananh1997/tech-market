@@ -373,7 +373,7 @@ namespace TechMarket.Controllers
                 phone.Wifi,
                 phone.Sim,
                 phone.Special
-            }).OrderByDescending(phone => phone.PhoneID);
+            }).OrderByDescending(phone => phone.PhoneID).Skip(first).Take(last);
 
             foreach (var i in p)
             {
