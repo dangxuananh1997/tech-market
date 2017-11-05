@@ -91,16 +91,16 @@
                 Special: "none",
                 Product: product
             };
-            console.log(product);
-            console.log(phone);
             $.ajax({
                 type: "POST",
-                url: "/api/Phones/PostPhone",
+                url: "http://localhost:51075/api/Phones/PostPhone",
                 dataType: "json",
-                success: function (data) {
-                    console.log(data);
+                success: function (response) {
+                    console.log(response);
                 },
-
+                fail: function (response) {
+                    console.log(response);
+                }
                 data: phone
             });
         }
@@ -163,17 +163,17 @@
         }
     </script>
     <script type="text/javascript">
-        var BrandID = [1, 2];
-        var test = ["a", "a"];
+        var BrandID = [];
+        var test = [""];
         var filter = {
             BrandIDList: BrandID,
-            OSList: test,
-            CPUList: test,
-            RAMList: test,
-            ROMList: test,
-            CameraList: test,
-            FrontCameraList: test,
-            BatteryList: test
+            OSList: BrandID,
+            CPUList: BrandID,
+            RAMList: BrandID,
+            ROMList: BrandID,
+            CameraList: BrandID,
+            FrontCameraList: BrandID,
+            BatteryList: BrandID
         }
         function filterP() {
             $.ajax({
@@ -182,7 +182,7 @@
                 dataType: "json",
                 data: {
                     filter: filter,
-                    first: 10,
+                    first: 0,
                     last: 20
                 },
                 success: function (data) {
@@ -245,36 +245,5 @@
         }
     </script>
 
-    <script type="text/javascript">
-        var BrandID = [1, 2];
-        var test = ["a", "a"];
-        var filter = {
-            BrandIDList: BrandID,
-            OSList: test,
-            CPUList: test,
-            RAMList: test,
-            ROMList: test,
-            CameraList: test,
-            FrontCameraList: test,
-            BatteryList: test
-        }
-        function filterP() {
-            $.ajax({
-                type: 'Post',
-                url: '/api/Phones/FilterPhone',
-                dataType: "json",
-                data: {
-                    filter: filter,
-                    first: 10,
-                    last: 20
-                },
-                success: function (data) {
-                    console.log(data);
-                    alert('Success');
-                },
-
-            });
-        }
-    </script>
 </body>
 </html>
