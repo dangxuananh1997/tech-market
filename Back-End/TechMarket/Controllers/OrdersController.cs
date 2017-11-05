@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,32 +19,60 @@ namespace TechMarket.Controllers
         private TechMarketEntities db = new TechMarketEntities();
 
         // GET: api/Orders
-        public IQueryable<Order> GetOrders()
+        public IHttpActionResult GetInRange(int first, int last)
         {
-            return db.Orders;
+            var orderList = db.Orders.Select(order => new
+            {
+                order.OrderID,
+                order.ProductID,
+                order.Quantity,
+                order.Price,
+                order.CustomerEmail,
+                order.CustomerName,
+                order.CustomerAddress,
+                order.CustomerPhone,
+                order.CustomerNote,
+                order.OrderStatus
+            }).OrderByDescending(order => order.OrderID).Skip(first).Take(last);
+
+            return Ok(orderList);
         }
 
         // GET: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> GetOrder(int id)
+        [HttpGet]
+        public IHttpActionResult GetOrder(int id)
         {
-            Order order = await db.Orders.FindAsync(id);
-            if (order == null)
+            var ord = db.Orders.Select(order => new
+            {
+                order.OrderID,
+                order.ProductID,
+                order.Quantity,
+                order.Price,
+                order.CustomerEmail,
+                order.CustomerName,
+                order.CustomerAddress,
+                order.CustomerPhone
+            }).Where(order => order.OrderID == id).FirstOrDefault();
+
+            if (ord == null)
             {
                 return NotFound();
             }
 
-            return Ok(order);
+            return Ok(ord);
         }
 
         // PUT: api/Orders/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutOrder(int id, Order order)
+        [HttpPost]
+        public async Task<IHttpActionResult> PutOrder([FromBody]JObject data)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            int id = data["id"].ToObject<Int32>();
+            Order order = data["order"].ToObject<Order>();
 
             if (id != order.OrderID)
             {
@@ -108,7 +137,7 @@ namespace TechMarket.Controllers
         }
 
         // DELETE: api/Orders/5
-        [ResponseType(typeof(Order))]
+        [HttpPost]
         public async Task<IHttpActionResult> DeleteOrder(int id)
         {
             Order order = await db.Orders.FindAsync(id);

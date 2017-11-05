@@ -46,6 +46,21 @@ namespace TechMarket.Controllers
             return Ok(phoneList);
         }
 
+        [HttpGet]
+        public IHttpActionResult SearchByName(string name)
+        {
+            var phoneList = db.Phones.Select(phone => new
+            {
+                phone.PhoneID,
+                phone.Product.ProductName,
+                phone.Product.Price,
+                phone.Product.Thumbnail,
+
+            }).Where(phone => phone.ProductName.Contains(name));
+
+            return Ok(phoneList);
+        }
+
         // GET: api/Phones/GetPhones/
         [HttpGet]
         public IHttpActionResult GetInRange(int first, int last)
@@ -290,16 +305,6 @@ namespace TechMarket.Controllers
                     }
                 }
             }
-            if (filter.CPUList != null)
-            {
-                foreach (var cpu in filter.CPUList)
-                {
-                    if (!String.IsNullOrEmpty(cpu))
-                    {
-                        p = await db.Phones.Where(phone => phone.CPU.Contains(cpu)).ToListAsync();
-                    }
-                }
-            }
             if (filter.RAMList != null)
             {
                 foreach (var ram in filter.RAMList)
@@ -337,16 +342,6 @@ namespace TechMarket.Controllers
                     if (!String.IsNullOrEmpty(frontCam))
                     {
                         p = await db.Phones.Where(phone => phone.FrontCamera.Contains(frontCam)).ToListAsync();
-                    }
-                }
-            }
-            if (filter.BatteryList != null)
-            {
-                foreach (var battery in filter.BatteryList)
-                {
-                    if (!String.IsNullOrEmpty(battery))
-                    {
-                        p = await db.Phones.Where(phone => phone.Battery.Contains(battery)).ToListAsync();
                     }
                 }
             }

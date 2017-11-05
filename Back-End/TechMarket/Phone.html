@@ -18,9 +18,13 @@
         <input type="text" id="phId" size="5" />
         <input id="DeletePost" type="button" value="Delete" onclick="deletePhone();" />
         <input id="SearchInRange" type="button" value="InRange" onclick="getByRange();" />
+        <input id="searchName" type="button" value="searchName" onclick="searchName();" />
         <input id="Filter" type="button" value="Filter" onclick="filterP();" />
         <input id="Update" type="button" value="Update" onclick="updateP();" />
+        <input id="OrderInRange" type="button" value="OrderInRange" onclick="getOrderInRange();" />
         <input id="Order" type="button" value="Order" onclick="orderP();" />
+        <input id="DeleteOrder" type="button" value="DeleteOrder" onclick="deleteOrder();" />
+        <input id="UpdateOrder" type="button" value="UpdateOrder" onclick="updateOrder();" />
         <p id="phone" />
     </div>
 
@@ -164,7 +168,7 @@
     </script>
     <script type="text/javascript">
         var BrandID = [];
-        var test = [""];
+        var test = [];
         var filter = {
             BrandIDList: BrandID,
             OSList: BrandID,
@@ -175,6 +179,7 @@
             FrontCameraList: BrandID,
             BatteryList: BrandID
         }
+        console.log(filter);
         function filterP() {
             $.ajax({
                 type: 'Post',
@@ -244,6 +249,113 @@
             });
         }
     </script>
+    <script type="text/javascript">
+        function orderP() {
+            var order = {
+                ProductID: 2,
+                Price: 8260000,
+                Quantity: 1,
+                CustomerEmail: "duong@email.com",
+                CustomerName: "duong",
+                CustomerAddress: "Q12",
+                CustomerPhone: "123214214",
+                CustomerNote: "Some Note",
+                OrderStatus: true
+            };
 
+            console.log(order);
+            $.ajax({
+                type: "POST",
+                url: "/api/Orders/PostOrder",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                },
+
+                data: order
+            });
+        }
+    </script>
+    <script type="text/javascript">
+         function deleteOrder() {
+             $.ajax({
+                 type: "POST",
+                 url: '/api/Orders/DeleteOrder/' + 4,
+                 dataType: "json",
+                 success: function (data) {
+                     alert('Success');
+                 }
+             });
+         }
+    </script>
+    <script type="text/javascript">
+         function getOrderInRange() {
+             var f = 0;
+             var l = 20;
+             $.ajax({
+                 type: 'get',
+                 url: '/api/Orders/GetInRange',
+                 dataType: "json",
+                 success: function (data) {
+                     console.log(data);
+                     alert('Success');
+                 },
+
+                 data: {
+                     first: f,
+                     last: l
+                 }
+             });
+         }
+    </script>
+    <script type="text/javascript">
+         function searchName() {
+             var name = "sony";
+             $.ajax({
+                 type: 'get',
+                 url: '/api/Phones/SearchByName',
+                 dataType: "json",
+                 success: function (data) {
+                     console.log(data);
+                     alert('Success');
+                 },
+
+                 data: {
+                     name
+                 }
+             });
+         }
+    </script>
+    <script type="text/javascript">
+         function updateOrder() {
+             var id = 1;
+             var order = {
+                 OrderID: 1,
+                 ProductID: 2,
+                 Price: 8260000,
+                 Quantity: 1,
+                 CustomerEmail: "duong12312@email.com",
+                 CustomerName: "duong",
+                 CustomerAddress: "Q12",
+                 CustomerPhone: "123214214",
+                 CustomerNote: "Some Note",
+                 OrderStatus: false
+             };
+             
+             $.ajax({
+                 type: "POST",
+                 url: "/api/Orders/PutOrder",
+                 dataType: "json",
+                 success: function (data) {
+                     console.log(data);
+                 },
+
+                 data: {
+                     id: id,
+                     order: order
+                 }
+             });
+         }
+    </script>
 </body>
 </html>

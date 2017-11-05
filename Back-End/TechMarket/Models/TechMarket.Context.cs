@@ -27,10 +27,8 @@ namespace TechMarket.Models
     
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
-        public virtual DbSet<Laptop> Laptops { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Phone> Phones { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Type> Types { get; set; }
     }
 }
