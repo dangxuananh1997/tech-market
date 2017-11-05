@@ -120,7 +120,7 @@ namespace TechMarket.Controllers
 
             int id = data["id"].ToObject<Int32>();
             Phone phone = data["phone"].ToObject<Phone>();
-            
+
 
             if (id != phone.PhoneID || id != phone.Product.ProductID)
             {
@@ -256,80 +256,100 @@ namespace TechMarket.Controllers
             {
                 return BadRequest(ModelState);
             }
+            PhoneFilter filter = new PhoneFilter();
 
-            PhoneFilter filter = data["filter"].ToObject<PhoneFilter>();
+            if (!(data["filter"] == null))
+            {
+                filter = data["filter"].ToObject<PhoneFilter>();
+            }
+
+            
             int first = data["first"].ToObject<Int32>();
             int last = data["last"].ToObject<Int32>();
 
-            if (filter == null)
-            {
-                Debug.WriteLine("Null");
-            }
-            else
-            {
-                Debug.WriteLine(filter.ToString());
-            }
-            
 
             var p = await db.Phones.Select(phone => phone).ToListAsync();
 
-            foreach(var brand in filter.BrandIDList)
+            if (filter.BrandIDList != null)
             {
-                if (brand != 0)
+                foreach (var brand in filter.BrandIDList)
                 {
-                    p = await db.Phones.Where(phone => phone.Product.BrandID == brand).ToListAsync();
+                    if (brand != 0)
+                    {
+                        p = await db.Phones.Where(phone => phone.Product.BrandID == brand).ToListAsync();
+                    }
                 }
             }
-            foreach(var os in filter.OSList)
+            if (filter.OSList != null)
             {
-                if (!String.IsNullOrEmpty(os))
+                foreach (var os in filter.OSList)
                 {
-                    p = await db.Phones.Where(phone => phone.OS.Contains(os)).ToListAsync();
+                    if (!String.IsNullOrEmpty(os))
+                    {
+                        p = await db.Phones.Where(phone => phone.OS.Contains(os)).ToListAsync();
+                    }
                 }
             }
-            foreach (var cpu in filter.CPUList)
+            if (filter.CPUList != null)
             {
-                if (!String.IsNullOrEmpty(cpu))
+                foreach (var cpu in filter.CPUList)
                 {
-                    p = await db.Phones.Where(phone => phone.CPU.Contains(cpu)).ToListAsync();
+                    if (!String.IsNullOrEmpty(cpu))
+                    {
+                        p = await db.Phones.Where(phone => phone.CPU.Contains(cpu)).ToListAsync();
+                    }
                 }
             }
-            foreach (var ram in filter.RAMList)
+            if (filter.RAMList != null)
             {
-                if (!String.IsNullOrEmpty(ram))
+                foreach (var ram in filter.RAMList)
                 {
-                    p = await db.Phones.Where(phone => phone.RAM.Contains(ram)).ToListAsync();
+                    if (!String.IsNullOrEmpty(ram))
+                    {
+                        p = await db.Phones.Where(phone => phone.RAM.Contains(ram)).ToListAsync();
+                    }
                 }
             }
-            foreach (var rom in filter.ROMList)
+            if (filter.ROMList != null)
             {
-                if (!String.IsNullOrEmpty(rom))
+                foreach (var rom in filter.ROMList)
                 {
-                    p = await db.Phones.Where(phone => phone.ROM.Contains(rom)).ToListAsync();
+                    if (!String.IsNullOrEmpty(rom))
+                    {
+                        p = await db.Phones.Where(phone => phone.ROM.Contains(rom)).ToListAsync();
+                    }
                 }
             }
-            foreach (var cam in filter.CameraList)
+            if (filter.CameraList != null)
             {
-                if (!String.IsNullOrEmpty(cam))
+                foreach (var cam in filter.CameraList)
                 {
-                    p = await db.Phones.Where(phone => phone.Camera.Contains(cam)).ToListAsync();
+                    if (!String.IsNullOrEmpty(cam))
+                    {
+                        p = await db.Phones.Where(phone => phone.Camera.Contains(cam)).ToListAsync();
+                    }
                 }
             }
-            foreach (var frontCam in filter.FrontCameraList)
+            if (filter.FrontCameraList != null)
             {
-                if (!String.IsNullOrEmpty(frontCam))
+                foreach (var frontCam in filter.FrontCameraList)
                 {
-                    p = await db.Phones.Where(phone => phone.FrontCamera.Contains(frontCam)).ToListAsync();
+                    if (!String.IsNullOrEmpty(frontCam))
+                    {
+                        p = await db.Phones.Where(phone => phone.FrontCamera.Contains(frontCam)).ToListAsync();
+                    }
                 }
             }
-            foreach (var battery in filter.BatteryList)
+            if (filter.BatteryList != null)
             {
-                if (!String.IsNullOrEmpty(battery))
+                foreach (var battery in filter.BatteryList)
                 {
-                    p = await db.Phones.Where(phone => phone.Battery.Contains(battery)).ToListAsync();
+                    if (!String.IsNullOrEmpty(battery))
+                    {
+                        p = await db.Phones.Where(phone => phone.Battery.Contains(battery)).ToListAsync();
+                    }
                 }
             }
-
             var phoneList = p.Select(phone => new
             {
                 phone.PhoneID,
@@ -355,8 +375,8 @@ namespace TechMarket.Controllers
                 phone.Wifi,
                 phone.Sim,
                 phone.Special
-            }).OrderByDescending(phone => phone.PhoneID).Skip(first).Take(last);
-            
+            }).OrderByDescending(phone => phone.PhoneID);
+
             foreach (var i in p)
             {
                 Debug.WriteLine(i.PhoneID);
@@ -365,7 +385,7 @@ namespace TechMarket.Controllers
             {
                 Debug.WriteLine("It's null");
             }
-            foreach(var phone in phoneList)
+            foreach (var phone in phoneList)
             {
                 Debug.WriteLine(phone.PhoneID);
             }
