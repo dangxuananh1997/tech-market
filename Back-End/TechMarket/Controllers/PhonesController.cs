@@ -283,69 +283,102 @@ namespace TechMarket.Controllers
             int last = data["last"].ToObject<Int32>();
 
 
-            var p = await db.Phones.Select(phone => phone).ToListAsync();
+            var tempPhoneList = await db.Phones.Select(phone => phone).ToListAsync();
+            var tempFilterList = new List<Phone>();
 
-            if (filter.BrandIDList != null)
-            {
+            // filter BrandID
+            if (filter.BrandIDList != null) { 
                 foreach (var brand in filter.BrandIDList)
                 {
                     if (brand != 0)
                     {
-                        p = await db.Phones.Where(phone => phone.Product.BrandID == brand).ToListAsync();
+                        tempFilterList = tempFilterList.Union(db.Phones.Where(phone => phone.Product.BrandID == brand).ToList()).ToList();
+                        Debug.WriteLine("filter before: ");
+                        foreach (var i in tempFilterList)
+                        {
+                            Debug.WriteLine(i.PhoneID + " BrandId: " + i.Product.BrandID);
+                        }
                     }
                 }
+                tempPhoneList = tempPhoneList.Intersect(tempFilterList).ToList();
+                Debug.WriteLine("Phone list before: ");
+                foreach (var i in tempPhoneList)
+                {
+                    Debug.WriteLine(i.PhoneID + " BrandId: " + i.Product.BrandID);
+                }
             }
+            tempFilterList = new List<Phone>();
+
+            // filter OS
             if (filter.OSList != null)
             {
                 foreach (var os in filter.OSList)
                 {
                     if (!String.IsNullOrEmpty(os))
                     {
-                        p = await db.Phones.Where(phone => phone.OS.Contains(os)).ToListAsync();
+                        tempFilterList = tempFilterList.Union(db.Phones.Where(phone => phone.OS.Contains(os)).ToList()).ToList();
                     }
                 }
+                tempPhoneList = tempPhoneList.Intersect(tempFilterList).ToList();
             }
+            tempFilterList = new List<Phone>();
+
+            // filter RAM
             if (filter.RAMList != null)
             {
                 foreach (var ram in filter.RAMList)
                 {
                     if (!String.IsNullOrEmpty(ram))
                     {
-                        p = await db.Phones.Where(phone => phone.RAM.Contains(ram)).ToListAsync();
+                        tempFilterList = tempFilterList.Union(db.Phones.Where(phone => phone.RAM.Contains(ram)).ToList()).ToList();
                     }
                 }
+                tempPhoneList = tempPhoneList.Intersect(tempFilterList).ToList();
             }
+            tempFilterList = new List<Phone>();
+            
+            // filter ROM
             if (filter.ROMList != null)
             {
                 foreach (var rom in filter.ROMList)
                 {
                     if (!String.IsNullOrEmpty(rom))
                     {
-                        p = await db.Phones.Where(phone => phone.ROM.Contains(rom)).ToListAsync();
+                        tempFilterList = tempFilterList.Union(db.Phones.Where(phone => phone.ROM.Contains(rom)).ToList()).ToList();
                     }
                 }
+                tempPhoneList = tempPhoneList.Intersect(tempFilterList).ToList();
             }
+            tempFilterList = new List<Phone>();
+
+            // filter Camera
             if (filter.CameraList != null)
             {
                 foreach (var cam in filter.CameraList)
                 {
                     if (!String.IsNullOrEmpty(cam))
                     {
-                        p = await db.Phones.Where(phone => phone.Camera.Contains(cam)).ToListAsync();
+                        tempFilterList = tempFilterList.Union(db.Phones.Where(phone => phone.Camera.Contains(cam)).ToList()).ToList();
                     }
                 }
             }
+            tempFilterList = new List<Phone>();
+
+            // filter Front Camera
             if (filter.FrontCameraList != null)
             {
                 foreach (var frontCam in filter.FrontCameraList)
                 {
                     if (!String.IsNullOrEmpty(frontCam))
                     {
-                        p = await db.Phones.Where(phone => phone.FrontCamera.Contains(frontCam)).ToListAsync();
+                        tempFilterList = tempFilterList.Union(db.Phones.Where(phone => phone.FrontCamera.Contains(frontCam)).ToList()).ToList();
                     }
                 }
+                tempPhoneList = tempPhoneList.Intersect(tempFilterList).ToList();
             }
-            var phoneList = p.Select(phone => new
+            tempFilterList = new List<Phone>();
+
+            var phoneList = tempPhoneList.Select(phone => new
             {
                 phone.PhoneID,
                 phone.Product.ProductName,
@@ -371,15 +404,13 @@ namespace TechMarket.Controllers
                 phone.Sim,
                 phone.Special
             }).OrderByDescending(phone => phone.PhoneID).Skip(first).Take(last);
-
-            foreach (var i in p)
+            Debug.WriteLine("List before: ");
+            foreach (var i in tempPhoneList)
             {
                 Debug.WriteLine(i.PhoneID);
             }
-            if (p == null)
-            {
-                Debug.WriteLine("It's null");
-            }
+
+            Debug.WriteLine("List after:");
             foreach (var phone in phoneList)
             {
                 Debug.WriteLine(phone.PhoneID);
