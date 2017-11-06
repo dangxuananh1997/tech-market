@@ -128,6 +128,7 @@ namespace TechMarket.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> PutPhone([FromBody]JObject data)
         {
+            var newContext = new TechMarketEntities();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -136,17 +137,19 @@ namespace TechMarket.Controllers
             int id = data["id"].ToObject<Int32>();
             Phone phone = data["phone"].ToObject<Phone>();
 
+            Product p = await db.Products.FindAsync(id);
+            phone.Product.GUID = p.GUID;
 
             if (id != phone.PhoneID || id != phone.Product.ProductID)
             {
                 return BadRequest();
             }
 
-            db.Entry(phone).State = EntityState.Modified;
+            newContext.Entry(phone).State = EntityState.Modified;
 
             try
             {
-                await db.SaveChangesAsync();
+                await newContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -159,14 +162,12 @@ namespace TechMarket.Controllers
                     throw;
                 }
             }
-            Product p = await db.Products.FindAsync(id);
-
-            phone.Product.GUID = p.GUID;
-            db.Entry(phone.Product).State = EntityState.Modified;
+                       
+            newContext.Entry(phone.Product).State = EntityState.Modified;
 
             try
             {
-                await db.SaveChangesAsync();
+                await newContext.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
