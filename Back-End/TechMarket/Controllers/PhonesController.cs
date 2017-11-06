@@ -129,22 +129,52 @@ namespace TechMarket.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> PutPhone([FromBody]JObject data)
         {
-            var newContext = new TechMarketEntities();
+            var newContext = new TechMarketEntities(); // new context to save change to data base.
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            int id = data["id"].ToObject<Int32>();
-            Phone phone = data["phone"].ToObject<Phone>();
-            
-            Product p = await db.Products.FindAsync(id);
-            phone.Product.GUID = p.GUID;
-            
+            int id = data["id"].ToObject<Int32>(); // id 
+            Phone phone = data["phone"].ToObject<Phone>(); // update phone object
+
+            // check id
             if (id != phone.PhoneID || id != phone.Product.ProductID)
             {
                 return BadRequest();
             }
+
+            
+            
+            // get the product base on given id
+            Product p = await db.Products.FindAsync(id);
+            // get the GUID of old product for update product (phone)
+            phone.Product.GUID = p.GUID;
+
+            // if thumbnail or picture doesn't get update, reserve them.
+            if (phone.Product.Thumbnail == null || phone.Product.Thumbnail == "")
+            {
+                phone.Product.Thumbnail = p.Thumbnail;
+            }
+            if (phone.Product.Pic1 == null || phone.Product.Pic1 == "")
+            {
+                phone.Product.Pic1 = p.Pic1;
+            }
+            if (phone.Product.Pic2 == null || phone.Product.Pic2 == "")
+            {
+                phone.Product.Pic2 = p.Pic2;
+            }
+            if (phone.Product.Pic3 == null || phone.Product.Pic3 == "")
+            {
+                phone.Product.Pic3 = p.Pic3;
+            }
+            if (phone.Product.Pic4 == null || phone.Product.Pic4 == "")
+            {
+                phone.Product.Pic4 = p.Pic4;
+            }
+
+            Debug.WriteLine("Thumbnail: " + phone.Product.Thumbnail);
 
             newContext.Entry(phone).State = EntityState.Modified;
 
