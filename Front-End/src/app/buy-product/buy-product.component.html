@@ -31,7 +31,7 @@
 		</div>
 		<div class="col-8">
 			<h4 class="text-center">Your Information</h4>
-			<form>
+			<form id="orderForm">
 				<div class="form-group">
 					<label for="">Your Name:</label>
 					<input type="text" name="name" class="form-control" [(ngModel)]="customerName">
@@ -54,7 +54,7 @@
 
 				<div class="form-group">
 					<label for="">Note:</label>
-					<textarea class="form-control" name="address" id="" rows="4" [(ngModel)]="customerNote"></textarea>
+					<textarea class="form-control" name="note" id="" rows="4" [(ngModel)]="customerNote"></textarea>
 				</div>
 
 				<button type="button" class="btn btn-primary" (click)="orderPhone()">Buy</button>

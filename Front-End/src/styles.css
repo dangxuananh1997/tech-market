@@ -11,3 +11,6 @@ body {
     padding-bottom: 24px;
     position: relative;
 }
+label.help-block {
+    color: #d9534f;
+}

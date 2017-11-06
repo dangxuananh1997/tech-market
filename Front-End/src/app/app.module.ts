@@ -25,6 +25,7 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { PhoneService } from './phone/phone.service';
 
 import * as $ from 'jquery';
+import {} from 'jquery.validation';
 
 
 const appRoutes: Routes = [

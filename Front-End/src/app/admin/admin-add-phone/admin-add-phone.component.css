@@ -23,3 +23,20 @@ i {
     left: 25%;
     transform: translateY(-50%);
 }
+input[type="file"].feature-picture-upload {
+    height: 38px;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+}
+input[type="file"].feature-picture-upload:hover + label.btn {
+    background: #0275d8;
+    color: #fff;
+}
+label.btn {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 350px;
+}

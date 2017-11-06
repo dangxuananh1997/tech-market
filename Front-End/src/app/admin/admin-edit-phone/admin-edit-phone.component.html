@@ -1,6 +1,6 @@
 <div class="container">
   <h2 class="text-center">Edit Phone</h2>
-  <form class="row">
+  <form class="row" id="editPhoneForm">
     <div class="col">
       <div class="form-group">
         <label>Product Name</label>
@@ -82,38 +82,38 @@
         <input type="number" name="Quantity" [(ngModel)]="phone.Quantity" class="form-control">
       </div>
       <div class="form-group">
-        <label for="">Feature Image</label>
+        <label for="">Thumbnail Picture</label>
         <label class="custom-file">
-          <input type="file" class="custom-file-input" name="thumbnail">
-          <span class="custom-file-control"></span>
+          <input type="file" name="thumbnail" class="feature-picture-upload" accept=".jpg, .jpeg, .png">
+          <label class="btn btn-outline-primary" for="featureImage">Upload Thumbnail</label>
         </label>
       </div>
       <div class="form-group">
-        <label for="">Feature Image 1</label>
+        <label for="">Details Picture 1</label>
         <label class="custom-file">
-          <input type="file" class="custom-file-input" name="pic1">
-          <span class="custom-file-control"></span>
+          <input type="file" name="pic1" class="feature-picture-upload" accept=".jpg, .jpeg, .png">
+          <label class="btn btn-outline-primary" for="featureImage">Upload Picture 1</label>
         </label>
       </div>
       <div class="form-group">
-        <label for="">Feature Image 2</label>
+        <label for="">Details Picture 2</label>
         <label class="custom-file">
-          <input type="file" class="custom-file-input" name="pic2">
-          <span class="custom-file-control"></span>
+          <input type="file" name="pic2" class="feature-picture-upload" accept=".jpg, .jpeg, .png">
+          <label class="btn btn-outline-primary" for="featureImage">Upload Picture 2</label>
         </label>
       </div>
       <div class="form-group">
-        <label for="">Feature Image 3</label>
+        <label for="">Details Picture 3</label>
         <label class="custom-file">
-          <input type="file" class="custom-file-input" name="pic3">
-          <span class="custom-file-control"></span>
+          <input type="file" name="pic3" class="feature-picture-upload" accept=".jpg, .jpeg, .png">
+          <label class="btn btn-outline-primary" for="featureImage">Upload Picture 3</label>
         </label>
       </div>
       <div class="form-group">
-        <label for="">Feature Image 4</label>
+        <label for="">Details Picture 4</label>
         <label class="custom-file">
-          <input type="file" class="custom-file-input" name="pic4">
-          <span class="custom-file-control"></span>
+          <input type="file" name="pic4" class="feature-picture-upload" accept=".jpg, .jpeg, .png">
+          <label class="btn btn-outline-primary" for="featureImage">Upload Picture 4</label>
         </label>
       </div>
       <div class="form-group">

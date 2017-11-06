@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 
 import { Phone } from '../model/phone';
@@ -24,10 +24,11 @@ export class BuyProductComponent implements OnInit {
   
   constructor(
     private phoneService: PhoneService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private http: Http
   ) {
-    route.params.subscribe(params => this.PhoneID = params['PhoneID']);
+    activatedRoute.params.subscribe(params => this.PhoneID = params['PhoneID']);
   }
 
   ngOnInit() {
@@ -39,26 +40,56 @@ export class BuyProductComponent implements OnInit {
             this.brand = this.phoneService.brand;
           });
       });
+
+    $.validator.setDefaults({
+      errorClass: 'help-block',
+      highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-danger');
+      },
+      unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-danger');
+      }
+    });
+
+    $('#orderForm').validate({
+      rules: {
+        name: {
+          required: true
+        },
+        email: {
+          email: true,
+          required: true
+        },
+        phone: {
+          number: true,
+          required: true
+        },
+        address: {
+          required: true
+        }
+      }
+    });
   }
 
   orderPhone() {
-    this.http.post('http://localhost:51075/api/Orders/PostOrder',
-      {
-        ProductID: this.phoneDetails.PhoneID,
-        Price: this.phoneDetails.Price,
-        Quantity: 1,
-        CustomerEmail: this.customerEmail,
-        CustomerName: this.customerName,
-        CustomerAddress: this.customerAddress,
-        CustomerPhone: this.customerPhone,
-        CustomerNote: this.customerNote,
-        OrderStatus: 'true'
-      }
-    ).toPromise().then(() => {
-      alert('success');
-    }).catch(() => {
-      alert('failed');
-    })
+    if ($('#orderForm').valid()) {
+      this.http.post('http://localhost:51075/api/Orders/PostOrder',
+        {
+          ProductID: this.phoneDetails.PhoneID,
+          Price: this.phoneDetails.Price,
+          Quantity: 1,
+          CustomerEmail: this.customerEmail,
+          CustomerName: this.customerName,
+          CustomerAddress: this.customerAddress,
+          CustomerPhone: this.customerPhone,
+          CustomerNote: this.customerNote,
+          OrderStatus: 1
+        }).toPromise().then(() => {
+          alert('SUCCESS!');
+          this.router.navigate(['/home']);
+        }).catch(() => {
+          alert('FAILED');
+        });
+    }
   }
-
 }

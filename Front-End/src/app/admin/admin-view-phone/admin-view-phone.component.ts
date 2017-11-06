@@ -26,7 +26,6 @@ export class AdminViewPhoneComponent implements OnInit {
     this.phoneService.getPhoneList(0, this.displayQuantity)
       .then(() => {
         this.phoneList = this.phoneService.phoneList;
-        console.log(this.phoneList);
       });
   }
 
