@@ -14,7 +14,6 @@ import { PhoneService } from '../../phone/phone.service';
 export class AdminViewPhoneComponent implements OnInit {
 
   phoneList: Phone[] = [];
-  tempList: Phone[] = [];
 
   displayQuantity: number = 15;
 
@@ -25,7 +24,10 @@ export class AdminViewPhoneComponent implements OnInit {
 
   ngOnInit() {
     this.phoneService.getPhoneList(0, this.displayQuantity)
-      .then(() => this.phoneList = this.phoneService.phoneList);
+      .then(() => {
+        this.phoneList = this.phoneService.phoneList;
+        console.log(this.phoneList);
+      });
   }
 
   loadMore() {
@@ -33,8 +35,11 @@ export class AdminViewPhoneComponent implements OnInit {
       .then(() => this.phoneList = this.phoneList.concat(this.phoneService.phoneList));
   }
 
-  showDetails(id: number) {
-    this.router.navigate(['./editPhone/' + id]);
+  deletePhone(id: number) {
+    this.phoneService.deletePhone(id).then(() => {
+      this.phoneService.getPhoneList(0, this.displayQuantity)
+        .then(() => this.phoneList = this.phoneService.phoneList);
+    });
   }
 
 }

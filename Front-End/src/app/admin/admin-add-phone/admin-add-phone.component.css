@@ -1,0 +1,25 @@
+input, select {
+    height: 40px;
+    width: 100%;
+}
+
+label.custom-file {
+    width: 100%;
+}
+
+form.row, h2 {
+    margin-top: 16px;
+}
+
+button {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    
+}
+i {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translateY(-50%);
+}

@@ -5,6 +5,7 @@ div.mr-a.ml-a {
 }
 div.carousel-item>img {
     margin: auto;
+    height: 400px;
 }
 div.carousel>a {
     background-color: rgba(0, 0, 0, 0.3);;

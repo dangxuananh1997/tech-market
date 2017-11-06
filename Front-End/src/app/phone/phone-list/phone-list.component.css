@@ -6,7 +6,7 @@ div.show-more>button {
     font-family: SF;
 }
 div.row div.card {
-    margin-bottom: 30px;
+    margin-bottom: 16px;
     overflow: hidden;
 }
 div.card div.feature-image {
@@ -20,4 +20,7 @@ div.card img.card-img-top {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+div.card-columns {
+    margin-top: 16px;
 }

@@ -1,35 +1,33 @@
 <div class="clearfix">
-	<a class="btn btn-success float-right" href="newPhone" role="button">
-		Add New Phone
-		<i class="material-icons">add_circle</i>
+	<a class="btn btn-success float-right" href="addPhone" role="button">
+		Add New Phone <i class="material-icons">add_circle</i>
 	</a>
 </div>
-<div class="card">
+
+<div class="card" *ngFor="let phone of phoneList">
     <div class="card-block">
 		<div class="row">
-			<img src="assets/img/iPhoneX.jpg" alt="" class="col-3" height="100%">
-			<div class="col-9 clearfix">
-				<h4>iPhone X</h4>
-				<h4>10000$</h4>
-
-				<a class="btn btn-danger float-right" href="#" role="button">
+			<div class="feature-img col-3">
+				<img src="{{phone.Thumbnail}}" alt="{{phone.ProductName}}">
+			</div>
+			<div class="col-7 clearfix">
+				<h5>Phone ID: {{phone.PhoneID}}</h5>
+				<h5>Phone Name: {{phone.ProductName}}</h5>
+				<h5>Price: {{phone.Price | currency:'USD':true:'3.0-0'}}</h5>
+				<h5>Quantity: {{phone.Quantity}}</h5>
+			</div>
+			<div class="clearfix manage-button col-2">
+				<button class="btn btn-danger float-right" (click)="deletePhone(phone.PhoneID)">
 					<i class="material-icons">delete_sweep</i>
-				</a>
-				<a class="btn btn-info float-right" href="#" role="button">
+				</button>
+				<a class="btn btn-info float-right" href="/editPhone/{{phone.PhoneID}}" role="button">
 					<i class="material-icons">create</i>
 				</a>
 			</div>
 		</div>
     </div>
 </div>
-<div class="card">
-	<div class="card-block">
-		<div class="row">
-			<img src="assets/img/logo.jpg" alt="" class="col-3" height="100%">
-			<div class="col-9">
-				<h4>iPhone X</h4>
-			</div>
-		</div>
-	</div>
-</div>
 
+<div class="ml-a mr-a show-more">
+	<button type="button" class="btn btn-outline-info show-more" (click)="loadMore()">Show More</button>
+</div>

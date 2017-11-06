@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { Router } from '@angular/router';
 
 import { Phone } from '../../model/phone';
@@ -13,9 +12,7 @@ import { PhoneService } from '../phone.service';
 })
 export class PhoneListComponent implements OnInit {
   
-  phoneList: Phone[] = [];
-  tempList: Phone[] = [];
-
+  public phoneList: Phone[] = [];
   displayQuantity: number = 15;
 
   constructor(
@@ -26,6 +23,10 @@ export class PhoneListComponent implements OnInit {
   ngOnInit() {
     this.phoneService.getPhoneList(0, this.displayQuantity)
       .then(() => this.phoneList = this.phoneService.phoneList);
+    
+      this.phoneService.onFilterEvent.subscribe(() => {
+        this.phoneList = this.phoneService.phoneList;
+      })
   }
 
   loadMore() {

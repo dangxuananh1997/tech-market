@@ -25,6 +25,7 @@ namespace TechMarket.Controllers
             {
                 order.OrderID,
                 order.ProductID,
+                order.Product.ProductName,
                 order.Quantity,
                 order.Price,
                 order.CustomerEmail,
@@ -46,6 +47,7 @@ namespace TechMarket.Controllers
             {
                 order.OrderID,
                 order.ProductID,
+                order.Product.ProductName,
                 order.Quantity,
                 order.Price,
                 order.CustomerEmail,
@@ -112,11 +114,6 @@ namespace TechMarket.Controllers
             order.OrderGUID = Guid.NewGuid();
             db.Orders.Add(order);
 
-            var product = db.Products.Where(p => p.ProductID == order.ProductID).FirstOrDefault();
-            product.Quantity = product.Quantity - 1;
-
-            db.Entry(product).State = EntityState.Modified;
-
             try
             {
                 await db.SaveChangesAsync();
@@ -147,6 +144,12 @@ namespace TechMarket.Controllers
             }
 
             db.Orders.Remove(order);
+
+            var product = db.Products.Where(p => p.ProductID == order.ProductID).FirstOrDefault();
+            product.Quantity = product.Quantity - 1;
+
+            db.Entry(product).State = EntityState.Modified;
+
             await db.SaveChangesAsync();
 
             return Ok(order);

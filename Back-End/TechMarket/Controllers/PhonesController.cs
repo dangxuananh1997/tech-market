@@ -72,6 +72,7 @@ namespace TechMarket.Controllers
                 phone.Product.Price,
                 phone.Product.BrandID,
                 phone.Product.Thumbnail,
+                phone.Product.Quantity,
                 phone.OS,
                 phone.ScreenWidth,
                 phone.ScreenResolution,

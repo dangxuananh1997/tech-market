@@ -17,6 +17,7 @@ export class Phone {
     GUID: string;
     ProductName: string;
     Price: number;
+    TypeID: number;
     Quantity: number;
     BrandID: number;
     Thumbnail: string;
@@ -44,6 +45,7 @@ export class Phone {
         GUID: string,
         ProductName: string,
         Price: number,
+        TypeID: number,
         Quantity: number,
         BrandID: number,
         Thumbnail: string,
@@ -70,6 +72,7 @@ export class Phone {
         this.GUID = GUID;
         this.ProductName = ProductName;
         this.Price = Price;
+        this.TypeID = TypeID;
         this.Quantity = Quantity;
         this.BrandID = BrandID;
         this.Thumbnail = Thumbnail;

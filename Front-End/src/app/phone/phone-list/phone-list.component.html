@@ -1,20 +1,20 @@
 <div class="row">
-    <div class="col-4" *ngFor="let phone of phoneList">
-        <div class="card">
+    <div class="card-columns">
+        <div class="card" *ngFor="let phone of phoneList">
             <div class="feature-image">
-                <img class="card-img-top" src="data:image/jpeg;base64,{{phone.Thumbnail}}" alt="{{phone.ProductName}}">
+                <img class="card-img-top" src="{{phone.Thumbnail}}" alt="{{phone.ProductName}}">
             </div>
             <div class="card-block">
                 <h4 class="card-title">
-                    {{phone.PhoneID}} - {{phone.ProductName}}
+                    {{phone.ProductName}}
                     <br>
-                     {{phone.Price | currency:'USD':true:'4.2-2'}}
+                     {{phone.Price | currency:'USD':true:'3.0-0'}}
                 </h4>
                 <p class="card-text">
                     <small class="text-muted">
                         OS: {{phone.OS}}
                         <br>
-                        Màn Hình: {{phone.ScreenWidth}} {{phone.ScreenResolution}}
+                        Screen: {{phone.ScreenWidth}} {{phone.ScreenResolution}}
                         <br>
                         CPU: {{phone.CPU}}
                         <br>
@@ -24,12 +24,12 @@
                         <br>
                         Camera: {{phone.Camera}} - {{phone.FrontCamera}}
                         <br>
-                        Pin: {{phone.Battery}}
+                        Battery: {{phone.Battery}}
                         <br>
                     </small>
                 </p>
                 <a routerLink="/phone/{{phone.PhoneID}}" class="btn btn-outline-primary">View Details</a>
-                <a href="" class="btn btn-outline-success">Buy</a>
+                <a href="/buy/{{phone.PhoneID}}" class="btn btn-outline-success">Order</a>
             </div>
         </div>
     </div>

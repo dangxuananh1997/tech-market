@@ -1,62 +1,62 @@
 <h4>Brand</h4>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" (change)="test($event)">
+    <input type="checkbox" class="custom-control-input" (change)="addBrandIDList($event, 1)">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">Apple</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addBrandIDList($event, 2)">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">Samsung</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addBrandIDList($event, 3)">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">Sony</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addBrandIDList($event, 4)">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">Oppo</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addBrandIDList($event, 5)">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">HTC</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addBrandIDList($event, 6)">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">Nokia</span>
 </label>
 
 
-<h4>Screen</h4>
+<h4>OS</h4>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addOSList($event, 'iOS')">
     <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">FHD</span>
+    <span class="custom-control-description">iOS</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addOSList($event, 'Android')">
     <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">HD</span>
+    <span class="custom-control-description">Android</span>
 </label>
 
 
 <h4>RAM</h4>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addRAMList($event, '2GB')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">2GB</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addRAMList($event, '3GB')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">3GB</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addRAMList($event, '4GB')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">4GB</span>
 </label>
@@ -64,35 +64,66 @@
 
 <h4>ROM</h4>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addROMList($event, '16GB')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">16GB</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addROMList($event, '32GB')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">32GB</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addROMList($event, '64GB')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">64GB</span>
 </label>
-
+<label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" (change)="addROMList($event, '128GB')">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">128GB</span>
+</label>
+<label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" (change)="addROMList($event, '256GB')">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">256GB</span>
+</label>
 
 <h4>Camera</h4>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addCameraList($event, '12MP')">
     <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">8MP</span>
+    <span class="custom-control-description">12MP</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addCameraList($event, '13MP')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">13MP</span>
 </label>
 <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input">
+    <input type="checkbox" class="custom-control-input" (change)="addCameraList($event, '19MP')">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">19MP</span>
+</label>
+<label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" (change)="addCameraList($event, '23MP')">
     <span class="custom-control-indicator"></span>
     <span class="custom-control-description">23MP</span>
+</label>
+
+<h4>Front Camera</h4>
+<label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" (change)="addFrontCameraList($event, '5MP')">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">5MP</span>
+</label>
+<label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" (change)="addFrontCameraList($event, '8MP')">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">8MP</span>
+</label>
+<label class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" (change)="addFrontCameraList($event, '13MP')">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">13MP</span>
 </label>

@@ -1,42 +1,12 @@
 <div class="container">
-  <div class="row">
-      <div class="col-3">
-          <app-phone-filter *ngIf="phoneTabIsActive"></app-phone-filter>
-          <app-laptop-filter *ngIf="!phoneTabIsActive"></app-laptop-filter>
-      </div>
+    <div class="row">
+        <div class="col-3">
+            <app-phone-filter></app-phone-filter>
+        </div>
+        
+        <div class="col-9">
+            <app-phone-list></app-phone-list>
+        </div>
 
-      <div class="col-9">
-          <div class="tabs">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item" (click)="openPhoneTab(true)">
-                      <a class="nav-link active" id="phone-tab" 
-                          data-toggle="tab" href="#phone" 
-                          role="tab" aria-controls="phone" 
-                          aria-expanded="true">
-                          Phone
-                      </a>
-                  </li>
-                  <li class="nav-item" (click)="openPhoneTab(false)">
-                      <a class="nav-link" id="laptop-tab" 
-                          data-toggle="tab" href="#laptop" 
-                          role="tab" aria-controls="laptop">
-                          Laptop
-                      </a>
-                  </li>
-              </ul>
-              <div class="tab-content fade show active" id="myTabContent">
-                  <div class="tab-pane fade show active" 
-                      id="phone" role="tabpanel" 
-                      aria-labelledby="phone-tab">
-                      <app-phone-list></app-phone-list>
-                  </div>
-                  <div class="tab-pane" 
-                      id="laptop" role="tabpanel" 
-                      aria-labelledby="laptop-tab">
-                      <app-laptop-list></app-laptop-list>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+    </div>
 </div>

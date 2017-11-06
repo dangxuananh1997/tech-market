@@ -16,16 +16,25 @@
 							aria-haspopup="true" 
 							aria-expanded="false" 
 							id="search-box"
-							[(ngModel)]="SearchValue"
+							[(ngModel)]="searchValue"
 							(keyup)="search()"
 							>
 					</div>
 					<div class="search-result">
 						<div class="dropdown-menu" aria-labelledby="search-box">
-							<a class="dropdown-item" href="#">Some Phone</a>
-							<a class="dropdown-item" href="#">Some Phone</a>
-							<a class="dropdown-item" href="#">Some Phone</a>
-							<a class="dropdown-item" href="#">Some Phone</a>
+							<div *ngFor="let phone of phoneList">
+								<a class="dropdown-item" href="phone/{{phone.PhoneID}}">
+									<div class="row">
+										<div class="feature-image col-3">
+											<img src="{{phone.Thumbnail}}" alt="{{phone.ProductName}}">
+										</div>
+										<div class="col-9">
+											<p>{{phone.ProductName}}</p>
+											<p>{{phone.Price | currency:'USD':true:'3.0-0'}}</p>
+										</div>
+									</div>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>

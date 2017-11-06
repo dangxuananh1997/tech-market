@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Phone } from '../model/phone';
+
+import { PhoneService } from '../phone/phone.service';
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -7,17 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  SearchValue: string;
+  searchValue: string;
+  phoneList: Phone[] = [];
 
-  constructor() { }
+  constructor(private phoneService: PhoneService) { }
 
   ngOnInit() {
   }
 
   search() {
-    console.log(this.SearchValue);
-    if (this.SearchValue != '' && this.SearchValue != null)
+    if (this.searchValue != '' && this.searchValue != null) {
       $('.dropdown-menu').show();
+      this.phoneService.searchPhone(this.searchValue)
+        .then(response => {
+          this.phoneList = response;
+        })
+    }
     else
       $('.dropdown-menu').hide();
   }

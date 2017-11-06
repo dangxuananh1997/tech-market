@@ -1,4 +1,7 @@
-export class Phone {
+import { Phone } from './phone';
+import { Product } from './product';
+
+export class PhoneDetails {
     PhoneID: number;
     OS: string;
     ScreenWidth: string;
@@ -14,16 +17,7 @@ export class Phone {
     Wifi: string;
     Sim: string;
     Special: string;
-    GUID: string;
-    ProductName: string;
-    Price: number;
-    Quantity: number;
-    BrandID: number;
-    Thumbnail: string;
-    Pic1: string;
-    Pic2: string;
-    Pic3: string;
-    Pic4: string;
+    Product: Product;
 
     constructor(
         PhoneID: number,
@@ -44,6 +38,7 @@ export class Phone {
         GUID: string,
         ProductName: string,
         Price: number,
+        TypeID: number,
         Quantity: number,
         BrandID: number,
         Thumbnail: string,
@@ -67,17 +62,7 @@ export class Phone {
         this.Wifi = Wifi;
         this.Sim = Sim;
         this.Special = Special;
-        this.GUID = GUID;
-        this.ProductName = ProductName;
-        this.Price = Price;
-        this.Quantity = Quantity;
-        this.BrandID = BrandID;
-        this.Thumbnail = Thumbnail;
-        this.Pic1 = Pic1;
-        this.Pic2 = Pic2;
-        this.Pic3 = Pic3;
-        this.Pic4 = Pic4;
+        this.Product = new Product(PhoneID, GUID, ProductName, Price, TypeID, Quantity,
+            BrandID, Thumbnail, Pic1, Pic2, Pic3, Pic4);
     }
-
 }
-

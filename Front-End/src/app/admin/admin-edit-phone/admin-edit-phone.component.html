@@ -1,3 +1,128 @@
-<p>
-  admin-edit-phone works!
-</p>
+<div class="container">
+  <h2 class="text-center">Edit Phone</h2>
+  <form class="row">
+    <div class="col">
+      <div class="form-group">
+        <label>Product Name</label>
+        <input name="Name" [(ngModel)]="phone.ProductName" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" name="Price" [(ngModel)]="phone.Price" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>OS</label>
+        <input name="OS" [(ngModel)]="phone.OS" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Screen Width</label>
+        <input name="ScreenWidth" [(ngModel)]="phone.ScreenWidth" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Screen Resolution</label>
+        <input name="ScreenResolution" [(ngModel)]="phone.ScreenResolution" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>CPU</label>
+        <input name="CPU" [(ngModel)]="phone.CPU" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>RAM</label>
+        <input name="RAM" [(ngModel)]="phone.RAM" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>ROM</label>
+        <input name="ROM" [(ngModel)]="phone.ROM" class="form-control">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label>Camera</label>
+        <input name="Camera" [(ngModel)]="phone.Camera" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Front Camera</label>
+        <input name="FrontCamera" [(ngModel)]="phone.FrontCamera" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Wifi</label>
+        <input name="Wifi" [(ngModel)]="phone.Wifi" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Headphone Jack</label>
+        <input name="HeadphoneJack" [(ngModel)]="phone.HeadphoneJack" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>NFC</label>
+        <input name="NFC" [(ngModel)]="phone.NFC" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Sim</label>
+        <input name="Sim" [(ngModel)]="phone.Sim" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Battery</label>
+        <input name="Battery" [(ngModel)]="phone.Battery" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="BrandID">Phone Brand</label>
+        <br>
+        <select class="custom-select" name="BrandID" [(ngModel)]="phone.BrandID">
+          <option *ngFor="let brand of brandList" type="number" value="{{brand.BrandID}}">{{brand.BrandName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label>Special</label>
+        <input name="Special" [(ngModel)]="phone.Special" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" name="Quantity" [(ngModel)]="phone.Quantity" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="">Feature Image</label>
+        <label class="custom-file">
+          <input type="file" class="custom-file-input" name="thumbnail">
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="">Feature Image 1</label>
+        <label class="custom-file">
+          <input type="file" class="custom-file-input" name="pic1">
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="">Feature Image 2</label>
+        <label class="custom-file">
+          <input type="file" class="custom-file-input" name="pic2">
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="">Feature Image 3</label>
+        <label class="custom-file">
+          <input type="file" class="custom-file-input" name="pic3">
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="">Feature Image 4</label>
+        <label class="custom-file">
+          <input type="file" class="custom-file-input" name="pic4">
+          <span class="custom-file-control"></span>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="">Confirm</label>
+        <button class="btn btn-success" (click)="updatePhone()">
+          <p>
+            <i class="material-icons">add_circle_outline</i>Update</p>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

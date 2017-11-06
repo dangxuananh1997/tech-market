@@ -1,3 +1,64 @@
-<p>
-  buy-product works!
-</p>
+<div class="container">
+	<div class="row">
+		<div class="col-4">
+			<div class="feature-img">
+				<img src="{{phoneDetails?.Thumbnail}}" alt="{{phoneDetails?.ProductName}}">
+			</div>
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<td scope="row">Product Name</td>
+						<td>{{phoneDetails?.ProductName}}</td>
+					</tr>
+					<tr>
+						<td scope="row">CPU</td>
+						<td>{{phoneDetails?.CPU}}</td>
+					</tr>
+					<tr>
+						<td scope="row">RAM</td>
+						<td>{{phoneDetails?.RAM}}</td>
+					</tr>
+					<tr>
+						<td scope="row">ROM</td>
+						<td>{{phoneDetails?.ROM}}</td>
+					</tr>
+					<tr>
+						<td scope="row">Price</td>
+						<td>{{phoneDetails?.Price | currency:'USD':true:'3.0-0'}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-8">
+			<h4 class="text-center">Your Information</h4>
+			<form>
+				<div class="form-group">
+					<label for="">Your Name:</label>
+					<input type="text" name="name" class="form-control" [(ngModel)]="customerName">
+				</div>
+
+				<div class="form-group">
+					<label for="">Email:</label>
+					<input type="text" name="email" class="form-control" [(ngModel)]="customerEmail">
+				</div>
+
+				<div class="form-group">
+					<label for="">Phone:</label>
+					<input type="text" name="phone" class="form-control" [(ngModel)]="customerPhone">
+				</div>
+
+				<div class="form-group">
+					<label for="">Address</label>
+					<textarea class="form-control" name="address" id="" rows="4" [(ngModel)]="customerAddress"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="">Note:</label>
+					<textarea class="form-control" name="address" id="" rows="4" [(ngModel)]="customerNote"></textarea>
+				</div>
+
+				<button type="button" class="btn btn-primary" (click)="orderPhone()">Buy</button>
+			</form>
+		</div>
+	</div>
+</div>

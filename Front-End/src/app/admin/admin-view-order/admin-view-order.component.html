@@ -1,3 +1,29 @@
-<p>
-  admin-view-order works!
-</p>
+<div class="card" *ngFor="let order of orderList">
+	<div class="card-block">
+		<div class="row">
+			<div class="col-4">
+				<p>Order ID: {{order.OrderID}}</p>
+				<p>Phone ID: {{order.ProductID}}</p>
+				<p>Phone Name: {{order.ProductName}}</p>
+				<p>Price: {{order.Price | currency:'USD':true:'3.0-0'}}</p>
+				<p>Quantity: {{order.Quantity}}</p>
+			</div>
+			<div class="col-7">
+				<p>Customer Name: {{order.CustomerName}}</p>
+				<p>Customer Email: {{order.CustomerEmail}}</p>
+				<p>Customer Address: {{order.CustomerAddress}}</p>
+				<p>Customer Phone: {{order.CustomerPhone}}</p>
+				<p>Customer Note: {{order.CustomerNote}}</p>
+			</div>
+			<div class="manage-button col-1">
+				<button class="btn btn-success float-right" (click)="checkOrder(order.OrderID)">
+					<i class="material-icons">checkmark</i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ml-a mr-a show-more">
+	<button type="button" class="btn btn-outline-info show-more" (click)="loadMore()">Show More</button>
+</div>
