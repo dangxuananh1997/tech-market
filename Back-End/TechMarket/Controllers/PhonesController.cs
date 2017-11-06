@@ -101,6 +101,7 @@ namespace TechMarket.Controllers
                 phone.Product.Pic2,
                 phone.Product.Pic3,
                 phone.Product.Pic4,
+                phone.Product.Quantity,
                 phone.OS,
                 phone.ScreenWidth,
                 phone.ScreenResolution,
@@ -136,10 +137,10 @@ namespace TechMarket.Controllers
 
             int id = data["id"].ToObject<Int32>();
             Phone phone = data["phone"].ToObject<Phone>();
-
+            
             Product p = await db.Products.FindAsync(id);
             phone.Product.GUID = p.GUID;
-
+            
             if (id != phone.PhoneID || id != phone.Product.ProductID)
             {
                 return BadRequest();
