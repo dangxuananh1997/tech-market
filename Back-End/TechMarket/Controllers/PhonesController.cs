@@ -137,10 +137,10 @@ namespace TechMarket.Controllers
 
             int id = data["id"].ToObject<Int32>();
             Phone phone = data["phone"].ToObject<Phone>();
-            
+
             Product p = await db.Products.FindAsync(id);
             phone.Product.GUID = p.GUID;
-            
+
             if (id != phone.PhoneID || id != phone.Product.ProductID)
             {
                 return BadRequest();
@@ -163,7 +163,7 @@ namespace TechMarket.Controllers
                     throw;
                 }
             }
-                       
+
             newContext.Entry(phone.Product).State = EntityState.Modified;
 
             try
@@ -280,7 +280,7 @@ namespace TechMarket.Controllers
                 filter = data["filter"].ToObject<PhoneFilter>();
             }
 
-            
+
             int first = data["first"].ToObject<Int32>();
             int last = data["last"].ToObject<Int32>();
 
@@ -289,7 +289,7 @@ namespace TechMarket.Controllers
             var tempFilterList = new List<Phone>();
 
             // filter BrandID
-            if (filter.BrandIDList != null) { 
+            if (filter.BrandIDList != null && filter.BrandIDList.Any()) { 
                 foreach (var brand in filter.BrandIDList)
                 {
                     if (brand != 0)
@@ -312,7 +312,7 @@ namespace TechMarket.Controllers
             tempFilterList = new List<Phone>();
 
             // filter OS
-            if (filter.OSList != null)
+            if (filter.OSList != null && filter.OSList.Any())
             {
                 foreach (var os in filter.OSList)
                 {
@@ -326,7 +326,7 @@ namespace TechMarket.Controllers
             tempFilterList = new List<Phone>();
 
             // filter RAM
-            if (filter.RAMList != null)
+            if (filter.RAMList != null && filter.RAMList.Any())
             {
                 foreach (var ram in filter.RAMList)
                 {
@@ -340,7 +340,7 @@ namespace TechMarket.Controllers
             tempFilterList = new List<Phone>();
             
             // filter ROM
-            if (filter.ROMList != null)
+            if (filter.ROMList != null && filter.ROMList.Any())
             {
                 foreach (var rom in filter.ROMList)
                 {
@@ -354,7 +354,7 @@ namespace TechMarket.Controllers
             tempFilterList = new List<Phone>();
 
             // filter Camera
-            if (filter.CameraList != null)
+            if (filter.CameraList != null && filter.CameraList.Any())
             {
                 foreach (var cam in filter.CameraList)
                 {
@@ -367,7 +367,7 @@ namespace TechMarket.Controllers
             tempFilterList = new List<Phone>();
 
             // filter Front Camera
-            if (filter.FrontCameraList != null)
+            if (filter.FrontCameraList != null && filter.CameraList.Any())
             {
                 foreach (var frontCam in filter.FrontCameraList)
                 {
