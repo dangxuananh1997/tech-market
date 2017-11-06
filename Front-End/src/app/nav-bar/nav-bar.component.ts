@@ -17,6 +17,7 @@ export class NavBarComponent implements OnInit {
   constructor(private phoneService: PhoneService) { }
 
   ngOnInit() {
+    
   }
 
   search() {

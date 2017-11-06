@@ -52,3 +52,7 @@ div.feature-image {
     overflow: hidden;
     padding: 16px;
 }
+div.dropdown-menu {
+  height: 500px;
+  overflow: auto;
+}
